@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+</head>
+<body>
+
+    <form action="/submit-form" method="post">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="phone">Phone Number:</label><br>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="e.g., 123-456-7890" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+<script>
+
+function validationEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test (email);
+}
+
+const emailInput = "test@example.com";
+if (validateEmail(emailInput)) {
+  console.log("Email is valid.");
+} else {
+  console.log("Email is invalid.");
+}
+
+function validatePhoneNumber (phoneNumber) {
+    const phoneRegex = /^\d{10}$/;
+      return phoneRegex.test(phoneNumber);
+}
+
+const phoneInput = "1234567890";
+
+if (validatePhoneNumber(phoneInput)) {
+  console.log("Phone number is valid.");
+} else {
+
+  console.log("Phone number is invalid.");
+}
+
+document.getElementById('myForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
+  const emailError = document.getElementById('emailError');
+  const phoneError = document.getElementById('phoneError');
+  const formMessage = document.getElementById('formMessage');
+
+  let isValid = true;
+  
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(emailInput.value)) {
+    emailError.textContent = 'Please enter a valid email address.';
+    emailError.style.display = 'block';
+    isValid = false;
+  } else {
+    emailError.style.display = 'none';
+  }
+
+  const phoneRegex = /^\d{10}$/; 
+  if (!phoneRegex.test(phoneInput.value)) {
+    phoneError.textContent = 'Please enter a valid 10-digit phone number.';
+    phoneError.style.display = 'block';
+  }
+
+
+</script>
+</body>
+</html>
